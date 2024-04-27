@@ -15,7 +15,7 @@ All examples are under `src/Examples` folder, in addition, two step-by-step demo
 
 ## Experience Tour Guide 
 
-  1. Open `https://zanlyun.github.io/FuseDMI/` in a new tab.
+  1. Open https://zanlyun.github.io/FuseDMI/ in a new tab.
   2. Copy one example code from `src/Examples` folder. For example, the battery example at `src/Example/Bench-Battery.txt`.
    
 ```
