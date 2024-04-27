@@ -27,7 +27,8 @@ app.ports.retCodeFile.subscribe(function(fileN) {
     if (fileN === "New File") {
         editor.getSession().setValue("");
     } else {
-        readTextFile("/src/Examples/" + fileN + ".txt", function(text) {
+        // readTextFile("FuseDMI/src/Examples/" + fileN + ".txt", function(text) {
+        readTextFile("FuseDMI/src/Examples/" + fileN + ".txt", function(text) {
             editor.getSession().setValue(text);});
     }
 });
