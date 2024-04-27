@@ -16,7 +16,7 @@ All examples are under `src/Examples` folder, in addition, two step-by-step demo
 ## Experience Tour Guide 
 
   1. Open https://zanlyun.github.io/FuseDMI/ in a new tab.
-  2. Copy one example code from `src/Examples` folder. For example, the battery example at `src/Example/Bench-Battery.txt`.
+  2. Copy one example code from `src/Examples` folder, or click on `New File` button, select `Bench-Battery`. It is important to note that for some other examples, the process includes additional building steps. However, to execute the code you have selected, you will need to remove any extra steps so that only one step remains in the code box.
    
 ```
 main = 
@@ -41,10 +41,10 @@ let rect1_fill= 120 in
         , const rect2_height}
 ];
 ```
-3. Click the right arrow to generate SVG shown on the rightside.
-4. Make a small change to SVG. For example, stretch the front of the battery horizentally.
-5. Click the down arrow to see the generated delta:`modify 1 Graphic.map [id,id,id,id,+30,+-3]`
-6. click the left arrow to fuse the delta into the program.
+1. Click the right arrow to generate SVG shown on the rightside.
+2. Make a small change to SVG. For example, stretch the front of the battery horizentally.
+3. Click the down arrow to see the generated delta:`modify 1 Graphic.map [id,id,id,id,+30,+-3]`
+4. click the left arrow to fuse the delta into the program.
 
 ## A Simple Explanation of the Process 
 0. Initially, the code box only has `main=[];`
