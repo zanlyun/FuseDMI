@@ -13,7 +13,7 @@
 
 All examples are under `src/Examples` folder, in addition, two step-by-step demos are under `src/Demos`.
 
-## User Guide 
+## Experience Tour Guide 
 
   1. Open `https://zanlyun.github.io/FuseDMI/` in a new tab.
   2. Copy one example code from `src/Examples` folder. For example, the battery example at `src/Example/Bench-Battery.txt`.
@@ -45,3 +45,16 @@ let rect1_fill= 120 in
 4. Make a small change to SVG. For example, stretch the front of the battery horizentally.
 5. Click the down arrow to see the generated delta:`modify 1 Graphic.map [id,id,id,id,+30,+-3]`
 6. click the left arrow to fuse the delta into the program.
+
+## A Simple Explanation of the Process 
+0. Initially, the code box only has `main=[];`
+1. Click on the `None` button, select one from `line`, `rect`, `circle`, `ellipse`, and `polygon`, and click `Draw` button
+2. Draw on the canvas on the right.
+3. Click the down arrow to generate delta
+4. Click the left arrow to generate code.
+5. Modify the code by direct change it, for example add `const` maker to proper constant or expression.
+6. Draw again on the canvas and repeat the two click process to genrate delta and program.
+7. Either select other shape and continue drawing.
+8. ....
+
+
