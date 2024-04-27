@@ -1,0 +1,32 @@
+main = 
+let a = 1 in 
+let double = \n -> (n, n) in
+double a ;
+
+
+main = 
+let a = 1 in 
+let double = \n -> (const n, n) in
+double a ;
+
+
+main = 
+let a = 1 in 
+let double = \n -> const (n, n) in
+double a ;
+
+
+main = 
+let a = 1 in 
+let double = \n -> const (n, n) in
+const (double a) ;
+
+main = 
+let a = 1 in 
+const (let double = \n -> const (n, n) in
+double a) ;
+
+main = 
+const (let a = 1 in 
+let double = \n -> (n, n) in
+double a) ;

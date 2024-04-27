@@ -1,0 +1,7 @@
+main = 
+let x0 = const 100 in 
+let y0 = const 200 in 
+let dx = 100 in 
+let x1 =  const (x0 + dx) in 
+let x2 =  const (x1 * 0.618) in 
+[line { 0, 0, x0, y0, x1, y0}, line {0, 0, x0, y0, x2, y0*0.618}];

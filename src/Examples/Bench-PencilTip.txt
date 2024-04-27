@@ -1,0 +1,21 @@
+main = 
+let rect1_x= const 97 in
+let rect1_y= const 172 in
+let rect1_width= 161 in
+let rect1_height= 39 in
+let polygon1_x0= (const rect1_x+rect1_width) in
+let polygon1_y0= const rect1_y in
+let polygon1_x2= 440 in
+let polygon1_y1= (const rect1_y+rect1_height) in
+let polygon1_y2= (polygon1_y0+rect1_height*0.5) in
+{ rect { 0, 27, const rect1_x, const rect1_y, rect1_width, rect1_height}
+, polygon { 0, 174, 
+    [(polygon1_x0,polygon1_y0),
+     ((polygon1_x0),polygon1_y1),(polygon1_x2,polygon1_y2)]}
+, polygon { 0, 334, 
+    [(polygon1_x2,polygon1_y2), 
+     ((polygon1_x2-polygon1_x0)*0.5+polygon1_x0,
+       polygon1_y0+(polygon1_y2-polygon1_y0)*0.5), 
+     (polygon1_x0+(polygon1_x2-polygon1_x0)*0.5, 
+      polygon1_y1-(polygon1_y1-polygon1_y2)*0.5)]}
+};

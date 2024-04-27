@@ -1,0 +1,25 @@
+1. refactor
+main = 
+let x1= 255 in
+let y1= 211 in
+let r = 60 in 
+let dr = 20 in
+{ circle { 0, 0, x1, y1, r+dr*4}
+, circle { 0, 52, x1, y1, r+dr*3}
+, circle { 0, 0, x1, y1, r+dr*2}
+, circle { 0, 52, x1, y1, r+dr}
+, circle { 0, 0, x1, y1, r}
+}; 
+
+2. add const 
+main = 
+let x1= 282 in
+let y1= 211 in
+let r = const 60 in 
+let dr = 20 in
+{ circle { 0, 0, x1, y1, const r+dr*4}
+, circle { 0, 52, x1, y1, const r+dr*3}
+, circle { 0, 0, x1, y1, const r+dr*2}
+, circle { 0, 52, x1, y1, const r+dr}
+, circle { 0, 0, x1, y1, r}
+}; 

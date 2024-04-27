@@ -1,0 +1,21 @@
+main = 
+let color = 43 in
+let x = 78 in 
+let y = 87 in 
+let w = 9 in 
+let h = 82 in 
+let interval = 20 in
+let dx = 10 in
+let dy = 10 in 
+let vw = 10 in
+let hcolor = 218 in
+[ rect { 0, color, x, y, w, h}
+ ,rect { 0, color, x+interval, y, w, h}
+ ,rect { 0, color, x+interval*2, y, w, h}
+ ,rect { 0, color, x+interval*3, y, w, h}
+ ,rect { 0, color, x+interval*4, y, w, h}
+ ,rect { 0, color, x+interval*5, y, w, h}
+ ,rect { 0, color, x+interval*6, y, w, h}
+, rect { 0, hcolor, x-dx, y+dy, w*2+interval*6+dx, vw}
+, rect { 0, hcolor, x-dx, y+h-dy-vw, w*2+interval*6+dx, vw}
+];

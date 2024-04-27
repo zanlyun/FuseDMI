@@ -1,0 +1,8 @@
+main =
+let rect1_x = 113 in 
+let rect1_y = 152 in
+let rect1_width = 89 in 
+let rect1_height = 55 in
+{
+  rect { 0, 205, const rect1_x, const rect1_y, const rect1_width, const rect1_height}, 
+  rect { 0, 0, const (rect1_x+rect1_width), const rect1_y, 62, const rect1_height }} ;

@@ -1,0 +1,128 @@
+1. Designer draws one arrow 
+main = 
+let graphics0 = g {0,[line { 0, 0, 179, 66, 111, 83},
+                      line { 0, 0, 179, 68, 96, 145},
+                      line { 0, 0, 179, 67, 172, 125}]} in
+graphics0::[];
+
+
+2.  Code refactors the code
+main = 
+let arrow1_x1 = 179 in 
+let arrow1_y1 = 66 in
+let arrow1 = g {0,[line { 0, 0, const arrow1_x1, const arrow1_y1, 111, 83},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 96, 145},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 172, 125}]} in
+arrow1::[];
+
+
+Problem: copy shall copy the result, not the expression! When I copy line2, it in fact copies  line { 0, 0, const arrow1_x1, const arrow1_y1, 96, 145}, so the arrow1_x1 and arro1_y1 is also copied, not the value, which is not correct. Shown as follows:
+
+main = 
+let arrow1_x1 = 179 in 
+let arrow1_y1 = 66 in
+let arrow1 = g {0,[line { 0, 0, const arrow1_x1, const arrow1_y1, 111, 83},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 96, 145},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 96, 145},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 172, 125}]} in
+arrow1::[];
+
+The expected result would be:
+main = 
+let arrow1_x1 = 179 in 
+let arrow1_y1 = 66 in
+let arrow1 = g {0,[line { 0, 0, const arrow1_x1, const arrow1_y1, 111, 83},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 96, 145},
+                   line { 0, 0, 179, 66, 96, 145},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 172, 125}]} in
+arrow1::[];
+
+Copy the whole arrow1 and set angle:
+
+main = 
+let arrow1_x1 = 183 in 
+let arrow1_y1 = 161 in
+let angle1 = 0 in
+let arrow1 = g {angle1,[line { 0, 0, const arrow1_x1, const arrow1_y1, 174, 204},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 100, 240},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 140, 164}]} in
+let arrow2 = g {const (angle1+120),[line { 0, 0, const arrow1_x1, const arrow1_y1, 174, 204},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 100, 240},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 140, 164}]} in
+
+arrow1::arrow2::[];
+
+
+Finished arrow2:
+main = 
+let arrow1_x1 = 183 in 
+let arrow1_y1 = 161 in
+let angle1 = 0 in
+let arrow2_dx = 30 in
+let arrow2_dy = -90 in
+let arrow1 = g {angle1,[line { 0, 0, const arrow1_x1, const arrow1_y1, 174, 204},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 100, 240},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 140, 164}]} in
+let arrow2 = g {const (angle1+120),
+                  [line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), 174+arrow2_dx, 204+arrow2_dy},
+                   line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), 100+arrow2_dx, 240+arrow2_dy},
+                   line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), 140+arrow2_dx, 164+arrow2_dy}]} in
+
+arrow1::arrow2::[];
+
+Finished version after adding arrow3:
+main = 
+let arrow1_x1 = 183 in 
+let arrow1_y1 = 161 in
+let angle1 = 0 in
+let arrow1 = g {angle1,[line { 0, 0, const arrow1_x1, const arrow1_y1, 174, 204},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 100, 240},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, 140, 164}]} in
+let arrow2_dx = 30 in
+let arrow2_dy = -90 in
+let arrow2 = g {const (angle1+120),
+                  [line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), 174+arrow2_dx, 204+arrow2_dy},
+                   line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), 100+arrow2_dx, 240+arrow2_dy},
+                   line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), 140+arrow2_dx, 164+arrow2_dy}]} in
+
+let arrow3_dx = 100 in
+let arrow3_dy = -20 in
+let arrow3 = g {const (angle1-120),
+                  [line { 0, 0, const (arrow1_x1+arrow3_dx), const (arrow1_y1+arrow3_dy), 174+arrow3_dx, 204+arrow3_dy},
+                   line { 0, 0, const (arrow1_x1+arrow3_dx), const (arrow1_y1+arrow3_dy), 100+arrow3_dx, 240+arrow3_dy},
+                   line { 0, 0, const (arrow1_x1+arrow3_dx), const (arrow1_y1+arrow3_dy), 140+arrow3_dx, 164+arrow3_dy}]} in
+arrow1::arrow2::arrow3::[];
+
+
+More elaborated version:
+
+main = 
+let arrow1_x1 = 183 in 
+let arrow1_y1 = 161 in
+let arrow1_line1_x2 = 174 in 
+let arrow1_line1_y2 = 204 in
+let arrow1_line2_x2 = 100 in 
+let arrow1_line2_y2 = 240 in
+let arrow1_line3_x2 = 140 in 
+let arrow1_line3_y2 = 164 in
+let angle1 = 0 in
+let arrow1 = g {angle1,[line { 0, 0, const arrow1_x1, const arrow1_y1, arrow1_line1_x2, arrow1_line1_y2},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, arrow1_line2_x2, arrow1_line2_y2},
+                   line { 0, 0, const arrow1_x1, const arrow1_y1, arrow1_line3_x2, arrow1_line3_y2}]} in
+let arrow2_dx = 30 in
+let arrow2_dy = -90 in
+let arrow2 = g {const (angle1+120),
+                  [line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), arrow1_line1_x2+arrow2_dx, arrow1_line1_y2+arrow2_dy},
+                   line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), arrow1_line2_x2+arrow2_dx, arrow1_line2_y2+arrow2_dy},
+                   line { 0, 0, const (arrow1_x1+arrow2_dx), const (arrow1_y1+arrow2_dy), arrow1_line3_x2+arrow2_dx, arrow1_line3_y2+arrow2_dy}]} in
+
+let arrow3_dx = 100 in
+let arrow3_dy = -20 in
+let arrow3 = g {const (angle1-120),
+                  [line { 0, 0, const (arrow1_x1+arrow3_dx), const (arrow1_y1+arrow3_dy), arrow1_line1_x2+arrow3_dx, arrow1_line1_y2+arrow3_dy},
+                   line { 0, 0, const (arrow1_x1+arrow3_dx), const (arrow1_y1+arrow3_dy), arrow1_line2_x2+arrow3_dx, arrow1_line2_y2+arrow3_dy},
+                   line { 0, 0, const (arrow1_x1+arrow3_dx), const (arrow1_y1+arrow3_dy), arrow1_line3_x2+arrow3_dx, arrow1_line3_y2+arrow3_dy}]} in
+arrow1::arrow2::arrow3::[];
+
+
+TODO: 如果arrow1可以整体移动，会更加好调整

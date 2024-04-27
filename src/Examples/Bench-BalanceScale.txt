@@ -1,0 +1,161 @@
+1. step1
+main = 
+let middle_line_x = 300 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, 189, const middle_line_x, 363}
+];
+
+2. step 2: add left line 
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, 363}
+, line { 0, 0, const middle_line_x, const middle_line_y1, 216, 235}];
+
+3. step 3: add right line
+
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, 363}
+, line { 0, 0, const middle_line_x, const middle_line_y1, 216, 235}
+, line { 0, 0, const middle_line_x, const middle_line_y1, 378, 244}
+];
+
+4. add left part:
+
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+let left_line_x2 = 216 in 
+let left_line_y2 = 235 in
+let left_twoline2_y = 277 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, 363}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const left_line_x2, const left_line_y2}
+, line { 0, 0, const middle_line_x, const middle_line_y1, 378, 244}
+, line { 0, 0, const left_line_x2, const left_line_y2, 173, const left_twoline2_y}
+, line { 0, 0, const left_line_x2, const left_line_y2, 241, const left_twoline2_y}
+, ellipse { 0, 0, 210, 280, 47, 8}];
+
+5. adjust left part:
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+let left_line_x2 = 216 in 
+let left_line_y2 = 235 in
+let left_twoline2_y = 280 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, 363}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const left_line_x2, const left_line_y2}
+, line { 0, 0, const middle_line_x, const middle_line_y1, 378, 244}
+, line { 0, 0, const left_line_x2, const left_line_y2, 165, const left_twoline2_y}
+, line { 0, 0, const left_line_x2, const left_line_y2, 255, const left_twoline2_y}
+, ellipse { 0, 0, 210, 280, 47, 8}];
+
+
+6. add right part 
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+let left_line_x2 = 216 in 
+let left_line_y2 = 235 in
+let left_twoline2_y = 280 in
+let right_line_x2 = 378 in 
+let right_line_y2 = 244 in
+let right_twoline2_y = 290 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, 363}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const left_line_x2, const left_line_y2}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const right_line_x2, const right_line_y2}
+, line { 0, 0, const left_line_x2, const left_line_y2, 165, const left_twoline2_y}
+, line { 0, 0, const left_line_x2, const left_line_y2, 255, const left_twoline2_y}
+, ellipse { 0, 0, 210, 280, 47, 8}
+, line { 0, 0, const right_line_x2, const right_line_y2, 332, const right_twoline2_y}
+, line { 0, 0, const right_line_x2, const right_line_y2, 413, const right_twoline2_y}];
+
+7. add right part:
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+let left_line_x2 = 216 in 
+let left_line_y2 = 235 in
+let left_twoline2_y = 280 in
+let right_line_x2 = 378 in 
+let right_line_y2 = 244 in
+let right_twoline2_y = 290 in
+let ellipse_rx = 47 in 
+let ellipse_ry = 8 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, 363}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const left_line_x2, const left_line_y2}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const right_line_x2, const right_line_y2}
+, line { 0, 0, const left_line_x2, const left_line_y2, 165, const left_twoline2_y}
+, line { 0, 0, const left_line_x2, const left_line_y2, 255, const left_twoline2_y}
+, ellipse { 0, 0, 210, 280, const ellipse_rx, const ellipse_ry}
+, line { 0, 0, const right_line_x2, const right_line_y2, 332, const right_twoline2_y}
+, line { 0, 0, const right_line_x2, const right_line_y2, 413, const right_twoline2_y}
+, ellipse { 0, 0, 375, 293, const ellipse_rx, const ellipse_ry}
+];
+
+8. polishment
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+let left_line_x2 = 216 in 
+let left_line_y2 = 235 in
+let left_twoline2_y = 280 in
+let right_line_x2 = 378 in 
+let right_line_y2 = 244 in
+let right_twoline2_y = 295 in
+let ellipse_rx = 47 in 
+let ellipse_ry = 8 in
+[
+  ellipse { 0, 211, 306, 378, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, 363}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const left_line_x2, const left_line_y2}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const right_line_x2, const right_line_y2}
+, line { 0, 0, const left_line_x2, const left_line_y2, 165, const left_twoline2_y}
+, line { 0, 0, const left_line_x2, const left_line_y2, 255, const left_twoline2_y}
+, ellipse { 0, 0, 210, 280, const ellipse_rx, const ellipse_ry}
+, line { 0, 0, const right_line_x2, const right_line_y2, 330, const right_twoline2_y}
+, line { 0, 0, const right_line_x2, const right_line_y2, 420, const right_twoline2_y}
+, ellipse { 0, 0, 375, 293, const ellipse_rx, const ellipse_ry}
+];
+
+9. even better one:
+main = 
+let middle_line_x = 300 in
+let middle_line_y1 = 189 in
+let middle_line_y2 = 363 in
+let left_line_x2 = 216 in 
+let left_line_y2 = 235 in
+let left_twoline2_y = 280 in
+let right_line_x2 = 378 in 
+let right_line_y2 = 244 in
+let right_twoline2_y = 295 in
+let left_ellipse_cx = 210 in
+let right_ellipse_cx = 375 in
+let ellipse_rx = 47 in 
+let ellipse_ry = 8 in
+[
+  ellipse { 0, 211, const middle_line_x, const middle_line_y2, 100, 18}, 
+  line { 0, 0, const middle_line_x, const middle_line_y1, const middle_line_x, const middle_line_y2}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const left_line_x2, const left_line_y2}
+, line { 0, 0, const middle_line_x, const middle_line_y1, const right_line_x2, const right_line_y2}
+, line { 0, 0, const left_line_x2, const left_line_y2, const (left_ellipse_cx-ellipse_rx), const left_twoline2_y}
+, line { 0, 0, const left_line_x2, const left_line_y2, const (left_ellipse_cx+ellipse_rx), const left_twoline2_y}
+, ellipse { 0, 0, const left_ellipse_cx, const left_twoline2_y, const ellipse_rx, const ellipse_ry}
+, line { 0, 0, const right_line_x2, const right_line_y2, const (right_ellipse_cx-ellipse_rx), const right_twoline2_y}
+, line { 0, 0, const right_line_x2, const right_line_y2, const (right_ellipse_cx+ellipse_rx), const right_twoline2_y}
+, ellipse { 0, 0, const right_ellipse_cx, const right_twoline2_y, const ellipse_rx, const ellipse_ry}
+];

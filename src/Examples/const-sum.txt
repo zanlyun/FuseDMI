@@ -1,0 +1,21 @@
+sum xs :=
+  case xs of 
+      [] -> 0 |
+      x::ss -> x + sum ss;
+main = sum [1,2];
+
+delta: +2
+
+sum xs :=
+  case xs of 
+      [] -> 0 |
+      x::ss -> x + sum ss;
+main = sum [const 1,2];
+
+
+
+sum xs :=
+  case const xs of 
+      [] -> 0 |
+      x::ss -> const x + sum ss;
+main = sum [const 1, 2];

@@ -1,0 +1,15 @@
+desc n :=
+  case n of 
+      1 -> [1] |
+      n -> n :: desc (n-1);
+      
+generateLines ns :=
+    let dx = 20 in
+    case ns of 
+      nil   -> [] |
+      n::nss -> let line1 = line { 0, 0, 198+dx*n, 134, 198+dx*n, 226} in 
+                line1 :: generateLines nss;
+      
+main = 
+let ns = desc 3 in
+generateLines ns;

@@ -1,0 +1,51 @@
+1. step 1
+main = 
+let polygon1_x2= 459 in
+let polygon1_y0= 149 in
+let polygon1_x0= 229 in
+[polygon { 0, 116, [(polygon1_x0,polygon1_y0), (polygon1_x2,polygon1_y0), (polygon1_x2,(polygon1_y0+(polygon1_x2-polygon1_x0)))]}] ;
+
+2. 
+
+main = 
+let polygon1_x2= 459 in
+let polygon1_y0= 149 in
+let polygon1_x0= 229 in
+let polygon1_x0= polygon1_x0 in
+let polygon1_y0= polygon1_y0 in
+let polygon1_x0= polygon1_x0 in
+let polygon1_y0= polygon1_y0 in
+let polygon1_y2= (polygon1_y0+(polygon1_x2-polygon1_x0)) in
+let polygon1_y1= polygon1_y0 in
+let polygon2_y1= (polygon1_y0+(polygon1_y2-polygon1_y1)*0.5) in
+let polygon1_x0= polygon1_x0 in
+let polygon1_x1= polygon1_x2 in
+[ polygon { 0, 116, [(polygon1_x0,polygon1_y0), (polygon1_x1,polygon1_y1), (polygon1_x2,polygon1_y2)]}
+, polygon { 0, 0, [((polygon1_x0),(polygon1_y0)), ((polygon1_x0),polygon2_y1), ((polygon1_x0+(polygon1_x1-polygon1_x0)*0.5),(polygon2_y1))]}] ;
+
+3. refactoring 
+
+main = 
+let polygon1_y0=  149 in
+let polygon1_x0=  229 in
+let polygon1_x2= 459 in
+let polygon1_y2= polygon1_y0+(polygon1_x2-polygon1_x0) in
+let polygon2_y1= polygon1_y0+(polygon1_y2-polygon1_y0)*0.5 in
+[ polygon { 0, 116, [const (polygon1_x0,polygon1_y0), (polygon1_x2,polygon1_y0), (polygon1_x2,polygon1_y2)]}
+, polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x0,polygon2_y1), (polygon1_x0+(polygon1_x2-polygon1_x0)*0.5,polygon2_y1)]}
+] ;
+
+4. 加const，当调整红色三角形边长时，不应该更新绿色以及红色三角形顶点的值
+
+main = 
+let polygon1_y0= const 149 in
+let polygon1_x0= const 229 in
+let polygon1_x2= 459 in
+let polygon1_y2= const polygon1_y0+(polygon1_x2-polygon1_x0) in
+let polygon2_y1= const polygon1_y0+(polygon1_y2-polygon1_y0)*0.5 in
+[ polygon { 0, 116, [ (polygon1_x0,polygon1_y0),  (polygon1_x2,polygon1_y0),  (polygon1_x2,polygon1_y2)]}
+, polygon { 0, 0, [ (polygon1_x0,polygon1_y0),  (polygon1_x0,polygon2_y1),  (polygon1_x0+(polygon1_x2-polygon1_x0)*0.5, polygon2_y1)]}
+] ;
+
+
+TODO: 为何给polygon的()加const更新失败？

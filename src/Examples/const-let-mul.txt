@@ -1,0 +1,21 @@
+main = let x = 1 in x*4;
+
+delta: *2
+
+main = let x = const 1 in x*4;
+
+main = let x = const 1 in (const x)*4;
+
+在SNS中，如果将1 freeze
+main = let x = 1! in x*4;
+则4会被更新为8
+如果将4也freeze，则整个不可改。
+
+
+-------------------------------------------
+main = 
+let a = 0 
+in (\x -> (1, (x,a))) a;
+
+delta: (+1,(+2,+3))
+

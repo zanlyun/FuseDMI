@@ -1,0 +1,18 @@
+main = 
+let rect3_x= 129 in
+let rect3_y= 210 in
+let rect3_width= 231 in
+let rect3_height = 15 in 
+let rect_dy = 40 in
+let ladder_height = 249 in 
+let ladder_width = 16 in
+let graphics= 
+    g {0,
+         { rect { 0, 0, rect3_x, rect3_y, rect3_width, rect3_height}
+         , rect { 0, 0, rect3_x, rect3_y + rect_dy, rect3_width, rect3_height}
+         , rect { 0, 0, rect3_x, rect3_y + rect_dy + rect_dy, rect3_width, rect3_height}
+         , rect { 0, 0, rect3_x, rect3_y + rect_dy + rect_dy + rect_dy, rect3_width, rect3_height}
+         }
+      } in
+graphics:::{ rect { 0, 0, rect3_x, rect3_y, ladder_width, ladder_height}
+          , rect { 0, 0, rect3_x+rect3_width, rect3_y, ladder_width, ladder_height}};

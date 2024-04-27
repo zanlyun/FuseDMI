@@ -1,0 +1,67 @@
+main = 
+let a = const 1 in   -- you cannot change a's value.
+let times = \t -> t * 2 in
+let pair = const \n -> times n in    -- you cannot change pair function
+const (pair a) ;    -- you cannot change application call 
+
+delta: *3
+main = 
+let a = const 1 in 
+let times = \t -> (t*3) * 2 in
+let pair = const \n -> times n in
+const (pair a) ;
+-------------------------------------------------------------------
+main = 
+let a = const 1 in 
+let plusOne = \n -> n+1 in
+let times = \n -> (plusOne n) * 2 in
+let pair =  const \n -> (times n, n) in
+const (pair a) ;
+
+delta: +4
+
+main = 
+let a = const 1 in 
+let plusOne = \n -> n+1 in
+let times = const \n -> (plusOne n) * 2 in
+let pair =  const \n -> (times n, n) in
+const (pair a) ;
+-------------------------------------------------------------------
+main = 
+let a = 1 in 
+let times = \n -> n * 2 in
+let pair = \n -> (times n, n) in
+pair a ;
+
+如果delta是(*3, id)，当前的更新策略是
+main = 
+let a = 1 in 
+let times = \n -> n * 2 in
+let pair = \n -> (times (n*3), n) in
+pair a ;
+
+但最佳做法是更新times的定义
+main = 
+let a = 1 in 
+let times = \n -> (n*3)* 2 in
+let pair = \n -> (times n, n) in
+pair a ;
+
+因此：
+main = 
+let a = const 1 in 
+let times = \n -> n * 2 in
+let pair =  const \n -> (times n, n) in
+const (pair a) ;
+-----------------------------------------
+(let a 1
+(let times (\n (mult n 2))
+(let pair (\n (n, n))
+pair a)))
+
+
+在SNS中，如果将2标记为freeze, (+4,id)的delta在SNS中不可能产生。
+当对第一个元素+4的同时，第二个元素一定会更新保持一致。
+main = 
+let x = 1 in (x*2!,x);
+

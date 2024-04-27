@@ -1,0 +1,25 @@
+main = 
+let x0 = 105 in 
+let y0 = 142 in 
+let w0 = 23 in 
+let h0 = 111 in
+let dx = 50 in
+let color = 172 in
+{ rect { 0, color, x0, y0, w0, h0}
+ ,rect { 0, color, x0+dx, y0, w0, h0}
+ ,rect { 0, color, x0+dx+dx, y0, w0, h0}}
+;
+
+
+2. add const 
+main = 
+let x0 = const 154 in 
+let y0 = const 142 in 
+let w0 = 23 in 
+let h0 = 111 in
+let dx = 50 in
+let color = 172 in
+{ rect { 0, color, const x0, y0, w0, h0}
+ ,rect { 0, color, const x0+dx, y0, w0, h0}
+ ,rect { 0, color, const x0+dx*3, y0, w0, h0}}
+;

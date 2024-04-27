@@ -1,0 +1,65 @@
+main = 
+let polygon1_x0= 79 in
+let polygon1_y0= 176 in
+let polygon1_y1= 299 in
+let polygon2_x0= 176 in
+let polygon2_x1= 127 in
+let polygon2_y1= const ((polygon1_y0+polygon1_y1)*0.5) in
+let dy = 70 in
+let polygon2_y0= polygon2_y1 - dy in
+let polygon2_y2= polygon2_y1 + dy in
+let dx = 120 in
+{ polygon { 0, 32, 
+   [(polygon1_x0,polygon1_y0), 
+    (polygon1_x0,polygon1_y1), 
+    (615, const (polygon1_y0+polygon1_y1)*0.5)]}
+, polygon { 0, 109, 
+   [(polygon2_x0,polygon2_y0), 
+    (polygon2_x1,polygon2_y1), 
+    (polygon2_x0,polygon2_y2), 
+    (polygon2_x0+polygon2_x0-polygon2_x1, polygon2_y1)]}
+, polygon { 0, 109, 
+   [(polygon2_x0+dx, polygon2_y0), 
+    (polygon2_x1+dx, polygon2_y1), 
+    (polygon2_x0+dx, polygon2_y2), 
+    ((polygon2_x0+dx)+polygon2_x0-polygon2_x1, polygon2_y1)]}
+, polygon { 0, 109, 
+   [(polygon2_x0+dx*2,polygon2_y0),
+    (polygon2_x1+dx*2,polygon2_y1), 
+    (polygon2_x0+dx*2,polygon2_y2), 
+    ((polygon2_x0+dx*2)+polygon2_x0-polygon2_x1, polygon2_y1)]}
+};
+
+
+2. add const 
+main = 
+let polygon1_x0= const 79 in
+let polygon1_y0= const 176 in
+let polygon1_y1= const 299 in
+let polygon2_x0= const 176 in
+let polygon2_x1= const 127 in
+let polygon2_y1= const ((polygon1_y0+polygon1_y1)*0.5) in
+let dy = 70 in
+let polygon2_y0= const (polygon2_y1 - dy) in
+let polygon2_y2= const (polygon2_y1 + dy) in
+let dx = 120 in
+{ polygon { 0, 32, 
+   [(const polygon1_x0,const polygon1_y0), 
+    (const polygon1_x0,const polygon1_y1), 
+    (615, const (polygon1_y0+polygon1_y1)*0.5)]}
+, polygon { 0, 109, 
+   [(const polygon2_x0,const polygon2_y0), 
+    (const polygon2_x1,const polygon2_y1), 
+    (const polygon2_x0,const polygon2_y2), 
+    (const (polygon2_x0+polygon2_x0-polygon2_x1), const polygon2_y1)]}
+, polygon { 0, 109, 
+   [(polygon2_x0+dx, polygon2_y0), 
+    (polygon2_x1+dx, polygon2_y1), 
+    (polygon2_x0+dx, polygon2_y2), 
+    ((polygon2_x0+dx)+polygon2_x0-polygon2_x1, polygon2_y1)]}
+, polygon { 0, 109, 
+   [(polygon2_x0+dx*2,polygon2_y0),
+    (polygon2_x1+dx*2,polygon2_y1), 
+    (polygon2_x0+dx*2,polygon2_y2), 
+    ((polygon2_x0+dx*2)+polygon2_x0-polygon2_x1, polygon2_y1)]}
+};

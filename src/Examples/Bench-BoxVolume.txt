@@ -1,0 +1,247 @@
+1. step1: 
+main = let polygon1_y1= 173 in
+let polygon1_y0= 132 in
+let polygon1_x0= 130 in
+let polygon1_x1= 141 in
+let polygon1_y0= polygon1_y0 in
+let polygon1_y3= (polygon1_y0) in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,(polygon1_y0+40)), ((polygon1_x1+70),(polygon1_y3+40)), ((polygon1_x0+70),polygon1_y3)]}
+]; 
+
+Problem: relate 无法进一步将两个水平方向的70提取出来作为一个公共值，竖直方向的两个40提取出一个公共值
+         p0.y = p3.y
+         p1.y = p2.y
+         p3.x = p2.x 
+         p0.x = p1.x
+         p1.y-p0.y = p2.y-p3.y = 70 
+         p3.x-p0.x = p2.x-p1.x = 40
+
+2. step2: code refactoring
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let polygon1_y1= 173 in
+let width = 70 in 
+let height = 40 in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,(polygon1_y0+height)), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+]; 
+
+3. set const  TODO: Error 26
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let polygon1_y1= 173 in
+let width = 70 in 
+let height = 40 in
+[
+polygon { 0, 0, [const (polygon1_x0,polygon1_y0), const (polygon1_x1,(polygon1_y0+height)), const ((polygon1_x1+width),(polygon1_y0+height)), const ((polygon1_x0+width),polygon1_y0)]}
+]; 
+
+4. copy and move 
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let polygon1_y1= 173 in
+let width = 70 in 
+let height = 40 in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,(polygon1_y0+height)), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [((polygon1_x0+32),(polygon1_y0+83)), ((polygon1_x1+32),((polygon1_y0+83)+height)), (((polygon1_x1+32)+width),((polygon1_y0+83)+height)), (((polygon1_x0+32)+width),(polygon1_y0+83))]}
+]; 
+
+5. code refactoring
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let polygon1_y1= 173 in
+let width = 70 in 
+let height = 40 in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,(polygon1_y0+height)), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [((polygon1_x0+polygon2_dx),(polygon1_y0+polygon2_dy)), ((polygon1_x1+polygon2_dx),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x1+polygon2_dx)+width),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+]; 
+
+6. draw another polygon3 
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let width = 70 in 
+let height = 40 in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,(polygon1_y0+height)), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [((polygon1_x0+polygon2_dx),(polygon1_y0+polygon2_dy)), ((polygon1_x1+polygon2_dx),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x1+polygon2_dx)+width),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+, polygon { 0, 0, [(105,135),(123,174),(175,256),(174,218)]}]; 
+
+7. use lots of relate operations for polygon3 with polygon1 and polygon2 
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let width = 70 in 
+let height = 40 in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+let polygon1_x0= polygon1_x0 in
+let polygon1_y0= polygon1_y0 in
+let polygon1_x1= polygon1_x1 in
+let polygon1_y1= (polygon1_y0+height) in
+let polygon2_x1= (polygon1_x1+polygon2_dx) in
+let polygon2_y1= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x0= (polygon1_x0+polygon2_dx) in
+let polygon2_y0= (polygon1_y0+polygon2_dy) in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,polygon1_y1), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [(polygon2_x0,polygon2_y0), (polygon2_x1,polygon2_y1), (((polygon1_x1+polygon2_dx)+width),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+, polygon { 0, 0, [((polygon1_x0),(polygon1_y0)),((polygon1_x1),(polygon1_y1)),((polygon2_x1),(polygon2_y1)),((polygon2_x0),(polygon2_y0))]}]; 
+
+8. refactoring a bit 
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let height = 40 in
+let width = 70 in 
+let polygon1_y1= (polygon1_y0+height) in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+let polygon2_x1= (polygon1_x1+polygon2_dx) in
+let polygon2_y1= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x0= (polygon1_x0+polygon2_dx) in
+let polygon2_y0= (polygon1_y0+polygon2_dy) in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,polygon1_y1), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [(polygon2_x0,polygon2_y0), (polygon2_x1,polygon2_y1), (((polygon1_x1+polygon2_dx)+width),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+, polygon { 0, 0, [(polygon1_x0,polygon1_y0),(polygon1_x1,polygon1_y1),(polygon2_x1,polygon2_y1),(polygon2_x0,polygon2_y0)]}]; 
+
+9. copy and move 
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let height = 40 in
+let width = 70 in 
+let polygon1_y1= (polygon1_y0+height) in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+let polygon2_x1= (polygon1_x1+polygon2_dx) in
+let polygon2_y1= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x0= (polygon1_x0+polygon2_dx) in
+let polygon2_y0= (polygon1_y0+polygon2_dy) in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,polygon1_y1), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [(polygon2_x0,polygon2_y0), (polygon2_x1,polygon2_y1), (((polygon1_x1+polygon2_dx)+width),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+, polygon { 0, 0, [(polygon1_x0,polygon1_y0),(polygon1_x1,polygon1_y1),(polygon2_x1,polygon2_y1),(polygon2_x0,polygon2_y0)]}, polygon { 0, 0, [((polygon1_x0+71),(polygon1_y0+2)) ,((polygon1_x1+71),(polygon1_y1+2)),((polygon2_x1+71),(polygon2_y1+2)),((polygon2_x0+71),(polygon2_y0+2))]}]; 
+
+10. 微调 remove +2, 重构71到width
+
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let height = 40 in
+let width = 70 in 
+let polygon1_y1= (polygon1_y0+height) in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+let polygon2_x1= (polygon1_x1+polygon2_dx) in
+let polygon2_y1= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x0= (polygon1_x0+polygon2_dx) in
+let polygon2_y0= (polygon1_y0+polygon2_dy) in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,polygon1_y1), ((polygon1_x1+width),(polygon1_y0+height)), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [(polygon2_x0,polygon2_y0), (polygon2_x1,polygon2_y1), (((polygon1_x1+polygon2_dx)+width),((polygon1_y0+polygon2_dy)+height)), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+, polygon { 0, 0, [(polygon1_x0,polygon1_y0),(polygon1_x1,polygon1_y1),(polygon2_x1,polygon2_y1),(polygon2_x0,polygon2_y0)]}
+, polygon { 0, 0, [((polygon1_x0+width),polygon1_y0) ,((polygon1_x1+width), polygon1_y1),((polygon2_x1+width),polygon2_y1),((polygon2_x0+width),polygon2_y0)]}]; 
+
+11. 加底座
+
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let height = 40 in
+let width = 70 in 
+let polygon1_y1= (polygon1_y0+height) in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+let polygon2_x1= (polygon1_x1+polygon2_dx) in
+let polygon2_y1= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x0= (polygon1_x0+polygon2_dx) in
+let polygon2_y0= (polygon1_y0+polygon2_dy) in
+let polygon1_x1= polygon1_x1 in
+let polygon1_y1= polygon1_y1 in
+let polygon1_x2= (polygon1_x1+width) in
+let polygon1_y2= (polygon1_y0+height) in
+let polygon2_y1= polygon2_y1 in
+let polygon2_x2= ((polygon1_x1+polygon2_dx)+width) in
+let polygon2_y2= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x1= polygon2_x1 in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,polygon1_y1), (polygon1_x2,polygon1_y2), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 0, [(polygon2_x0,polygon2_y0), (polygon2_x1,polygon2_y1), (polygon2_x2,polygon2_y2), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+, polygon { 0, 0, [(polygon1_x0,polygon1_y0),(polygon1_x1,polygon1_y1),(polygon2_x1,polygon2_y1),(polygon2_x0,polygon2_y0)]}
+, polygon { 0, 0, [((polygon1_x0+width),polygon1_y0) ,((polygon1_x1+width), polygon1_y1),((polygon2_x1+width),polygon2_y1),((polygon2_x0+width),polygon2_y0)]}
+, polygon { 0, 47, [((polygon1_x1),(polygon1_y1)),((polygon2_x1),(polygon2_y1)),((polygon2_x2),(polygon2_y2)),((polygon1_x2),(polygon1_y2))]}]; 
+
+12. 调整polygon顺序
+main = 
+let polygon1_x0= 130 in
+let polygon1_y0= 132 in
+let polygon1_x1= 141 in
+let height = 40 in
+let width = 70 in 
+let polygon1_y1= (polygon1_y0+height) in
+let polygon2_dx = 55 in 
+let polygon2_dy = 83 in
+let polygon2_x1= (polygon1_x1+polygon2_dx) in
+let polygon2_y1= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x0= (polygon1_x0+polygon2_dx) in
+let polygon2_y0= (polygon1_y0+polygon2_dy) in
+let polygon1_x1= polygon1_x1 in
+let polygon1_y1= polygon1_y1 in
+let polygon1_x2= (polygon1_x1+width) in
+let polygon1_y2= (polygon1_y0+height) in
+let polygon2_y1= polygon2_y1 in
+let polygon2_x2= ((polygon1_x1+polygon2_dx)+width) in
+let polygon2_y2= ((polygon1_y0+polygon2_dy)+height) in
+let polygon2_x1= polygon2_x1 in
+[
+polygon { 0, 0, [(polygon1_x0,polygon1_y0), (polygon1_x1,polygon1_y1), (polygon1_x2,polygon1_y2), ((polygon1_x0+width),polygon1_y0)]}
+, polygon { 0, 47, [((polygon1_x1),(polygon1_y1)),((polygon2_x1),(polygon2_y1)),((polygon2_x2),(polygon2_y2)),((polygon1_x2),(polygon1_y2))]}
+, polygon { 0, 0, [(polygon2_x0,polygon2_y0), (polygon2_x1,polygon2_y1), (polygon2_x2,polygon2_y2), (((polygon1_x0+polygon2_dx)+width),(polygon1_y0+polygon2_dy))]}
+, polygon { 0, 0, [(polygon1_x0,polygon1_y0),(polygon1_x1,polygon1_y1),(polygon2_x1,polygon2_y1),(polygon2_x0,polygon2_y0)]}
+, polygon { 0, 0, [((polygon1_x0+width),polygon1_y0) ,((polygon1_x1+width), polygon1_y1),((polygon2_x1+width),polygon2_y1),((polygon2_x0+width),polygon2_y0)]}
+]; 
+
+
+13. draw another 
+main =  
+let rect1_fill= 31 in
+[ rect { 0, rect1_fill, 237, 112, 139, 172}
+, rect { 0, (rect1_fill), 198, 141, 207, 118}];
+
+14 relate
+
+main =  
+let rect1_fill= 31 in
+let rect1_height= 172 in
+let rect1_width= 139 in
+let rect1_x= 237 in
+let rect1_y= 112 in
+let rect2_width= rect1_height in
+let rect2_height= rect1_width in
+[ rect { 0, rect1_fill, rect1_x, rect1_y, rect1_width, rect1_height}
+, rect { 0, (rect1_fill), (rect1_x+rect1_width*1/2-rect2_width*1/2), (rect1_y+rect1_height*1/2-rect2_height*1/2), rect2_width, rect2_height}];
+
+

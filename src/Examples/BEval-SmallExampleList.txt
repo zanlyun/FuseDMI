@@ -1,0 +1,132 @@
+-- P-Const
+main =  const 1;
+main =  3;
+
+-- P-Var
+main =  let x = const 1 in const x;
+main =  (\x -> const x) (const 1);
+main =  (\x -> x) (const 1);   
+main =  (\x -> const x) 1;
+main =  (\x -> x) 1;
+
+-- P-APP
+main =  (const \x -> x) (const 1);
+main =  (\x -> x+1) (const 1);
+main =  let y = 2 in (const \x -> x+y) (const 1);
+main =  let y = 2 in 
+        let z = const 1 in 
+        (const \x -> x+y) (const z);
+main =  let y = 2 in 
+        (const \x -> x+(y+1)) (const 1);
+main =  let y = 2 in 
+        (const \x -> x+(1+y)) (const 1);
+main =  let y = const 10 in 
+        (\x -> x+y) (const y);
+main =  let y = const 10 in
+        let z = 5 in
+        (\x -> x+y+z) (const y);
+main =  let y = const 10 in
+        let z = 5 in
+        (const \x -> x+y+z) (const y);
+main =  let y = const 10 in
+        (const \x -> x+y) y;
+main =  let y = const 10 in
+        let z = 5 in
+        (const \x -> z+x) y;
+main =  let y = 12 in
+        (const \x -> x+y) y;
+main =  let y = 12 in
+        (const \x -> x+y) (const y);
+main =  let y = 10 in
+        (const \x -> x+y) (const (2+y));
+main =  let y = 10 in
+        (const \x -> x+y) (const (y+2));
+
+-- case
+main =  let x = 1 in
+        case const 1 of 
+              1 -> const x
+            | 2 -> const x * 2;
+
+main =  let x = 1 in
+        case const 1 of 
+              1 -> 1 + x
+            | 2 -> const (2+x);
+
+main =  let x = 1 in
+        case (1,1) of 
+              (1,x) -> 1 + x
+            | (2,x) -> const (x+2);
+
+main =  let y = 1 in
+        case (y,1) of 
+                (1,x) -> const (y+x)
+              | (2,x) -> const (x+2);              
+
+main =  let y = 1 in
+        const (case (y,1) of 
+                (1,x) -> const (y+x)
+              | (2,x) -> const (x+2)); 
+
+main =  let y = const 1 in
+        const (case (y,1) of 
+                (1,x) -> const (y+x)
+              | (2,x) -> const (x+2)); 
+
+main =  let y = const 1 in
+        case (y,3) of 
+                (1,x) -> const (y+x)
+              | (2,x) -> const (x+2); 
+
+main =  let y = const 1 in
+        let z = 2 in
+        case const (y,3) of 
+                (1,x) -> const (y+x+z)
+              | (2,x) -> const (x+2); 
+
+main =  let x = 1 in
+        case 1 of 
+                1 -> const x
+              | 2 -> const (x*2); 
+
+main =  let x = 1 in
+        case 1 of 
+                x -> const x; 
+
+-- Oplus 
+main = const 1 + const 2; 
+
+main = let x = 1 in const 1 + x;
+
+main = let x = const 1 in 
+       let y = 2 in
+       const x + const (1+y);
+
+main = let x = const 1 in 
+       const 1 + x;
+
+main = let x = 1 in 
+       let y = const 1 in 
+       const y + (y+x);
+
+main = let x = const 1 in 
+       let y = 2 in 
+       x + const y;
+
+main = let x = 1 in 
+       let y = 2 in 
+       y + const x;
+
+main = let x = 1 in 
+       x + const x;
+
+main = let x = const 1 in
+       let y = 2 in
+       const y + x;
+
+main = let x = const 1 in
+       const (1+x) + x;
+
+main = let x = 1 in
+       let y = 2 in
+       const x + y;

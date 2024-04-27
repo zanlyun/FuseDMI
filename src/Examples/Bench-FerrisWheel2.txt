@@ -1,0 +1,30 @@
+main = 
+let circle1_cx= 200 in
+let circle1_cy= 200 in
+let circle1_r= 60 in
+let degree = 51.428 in
+let rect_w = 18 in 
+let rect_h = 19 in 
+let graphics0= 
+    g {0,
+        { line { 0, 0, const circle1_cx, const (circle1_cy-circle1_r), const circle1_cx, const circle1_cy}
+        ,line { 0, 0, circle1_cx+circle1_r*cos(degree), circle1_cy-circle1_r*sin(degree), const circle1_cx, const circle1_cy}
+        ,line { 0, 0, circle1_cx+circle1_r*cos(degree*2), circle1_cy-circle1_r*sin(degree*2), const circle1_cx, const circle1_cy}
+        ,line { 0, 0, circle1_cx+circle1_r*cos(degree*3), circle1_cy-circle1_r*sin(degree*3), const circle1_cx, const circle1_cy}
+        ,line { 0, 0, circle1_cx+circle1_r*cos(degree*4), circle1_cy-circle1_r*sin(degree*4), const circle1_cx, const circle1_cy}
+        ,line { 0, 0, circle1_cx+circle1_r*cos(degree*5), circle1_cy-circle1_r*sin(degree*5), const circle1_cx, const circle1_cy}
+        ,line { 0, 0, circle1_cx+circle1_r*cos(degree*6), circle1_cy-circle1_r*sin(degree*6), const circle1_cx, const circle1_cy}
+    }} in
+let graphics1= 
+    g {0,
+    { 
+    , rect { 0, circle1_cx+circle1_r, circle1_cy, 109, rect_w, rect_h}
+    , rect { 0, circle1_cx+circle1_r*cos(degree*2), circle1_cy-circle1_r*sin(degree*2), 109, rect_w, rect_h}
+    , rect { 0, circle1_cx+circle1_r*cos(degree*3), circle1_cy-circle1_r*sin(degree*3), 109, rect_w, rect_h}
+    , rect { 0, circle1_cx+circle1_r*cos(degree*4), circle1_cy-circle1_r*sin(degree*4), 109, rect_w, rect_h}
+    , rect { 0, circle1_cx+circle1_r*cos(degree*5), circle1_cy-circle1_r*sin(degree*5), 109, rect_w, rect_h}
+    , rect { 0, circle1_cx+circle1_r*cos(degree*6), circle1_cy-circle1_r*sin(degree*6), 109, rect_w, rect_h}}} in
+{ circle { 0, 55, const circle1_cx, const circle1_cy, const circle1_r}
+, graphics0
+, graphics1
+, circle { 0, 220, const circle1_cx, const circle1_cy, 15}};

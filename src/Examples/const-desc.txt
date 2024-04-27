@@ -1,0 +1,6 @@
+desc n :=
+  case n of 
+      0 -> [0] |
+      n -> n :: desc (n-1);
+main = desc 1;
+
