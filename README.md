@@ -18,7 +18,8 @@ All examples are under `src/Examples` folder, in addition, two step-by-step demo
   1. Open `https://zanlyun.github.io/FuseDMI/` in a new tab.
   2. Copy one example code from `src/Examples` folder. For example, the battery example at `src/Example/Bench-Battery.txt`.
    
-```main = 
+```
+main = 
 let rect1_x= 119 in
 let rect1_width= 178 in
 let rect1_y= 146 in
