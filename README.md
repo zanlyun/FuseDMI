@@ -1,5 +1,7 @@
 # FuseDMI: Manipulation-directed Bidirectional Live Programming for SVG
 
+Building upon FuseDM proposed in paper `Fusing Direct Manipulations into Functional Programs` in POPL 2024, we further developed FuseDMI where ‘I’ stands for ‘Intentionally’.
+
 ![](./landing.png)
 
 ## How to run the system
@@ -57,4 +59,6 @@ let rect1_fill= 120 in
 7. Either select other shape and continue drawing.
 8. ....
 
+## Note
+1. FuseDMI is implemented based on previous work FuseDM in `Fusing Direct Manipulations into Functional Programs` presented in POPL 2024, URL: https://dl.acm.org/doi/10.1145/3632883
 
