@@ -59,6 +59,11 @@ let rect1_fill= 120 in
 7. Either select other shape and continue drawing.
 8. ....
 
+## Demo Video 
+
+There is a demo video on youtube: [Balance Scale SVG Construction using FuseDMI](https://youtu.be/ImoOpGfubBw).
+
+
 ## Note
 1. FuseDMI is implemented based on previous work FuseDM in `Fusing Direct Manipulations into Functional Programs` presented in POPL 2024, URL: https://dl.acm.org/doi/10.1145/3632883
 
